@@ -468,7 +468,15 @@ dimensions ({rows} x {cols}).
     for row in specs:
         for spec in row:
             if spec is not None:
-                has_secondary_y = has_secondary_y or spec["secondary_y"]
+                if spec["secondary_y"]:
+                    if spec["colspan"] == spec_defaults["colspan"] &&
+                    spec["rowspan"] == spec_defaults["rowspan"] &&
+                    spec["l"] == spec_defaults["l"] &&
+                    spec["r"] == spec_defaults["r"] &&
+                    spec["b"] == spec_defaults["b"] &&
+                    spec["t"] == spec_defaults["t"]:
+                        has_secondary_y = False
+                # has_secondary_y = has_secondary_y or spec["secondary_y"]
             if spec and spec["type"] != "xy" and spec["secondary_y"]:
                 raise ValueError(
                     """
