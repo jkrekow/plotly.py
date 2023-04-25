@@ -55,6 +55,7 @@ def make_subplots(
     column_widths=None,
     row_heights=None,
     specs=None,
+    allot_secondary_y_space=False,
     insets=None,
     column_titles=None,
     row_titles=None,
@@ -469,14 +470,10 @@ dimensions ({rows} x {cols}).
         for spec in row:
             if spec is not None:
                 if spec["secondary_y"]:
-                    if spec["colspan"] == spec_defaults["colspan"] &&
-                    spec["rowspan"] == spec_defaults["rowspan"] &&
-                    spec["l"] == spec_defaults["l"] &&
-                    spec["r"] == spec_defaults["r"] &&
-                    spec["b"] == spec_defaults["b"] &&
-                    spec["t"] == spec_defaults["t"]:
+                    if not allot_secondary_y_space:
                         has_secondary_y = False
-                # has_secondary_y = has_secondary_y or spec["secondary_y"]
+                    else:
+                        has_secondary_y = has_secondary_y or spec["secondary_y"]
             if spec and spec["type"] != "xy" and spec["secondary_y"]:
                 raise ValueError(
                     """
